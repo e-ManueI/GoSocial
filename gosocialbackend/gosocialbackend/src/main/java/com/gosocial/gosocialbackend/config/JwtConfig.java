@@ -1,14 +1,14 @@
 package com.gosocial.gosocialbackend.config;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import io.jsonwebtoken.security.Keys;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.security.Key;
 
 @Configuration
 public class JwtConfig {
@@ -23,16 +23,27 @@ public class JwtConfig {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", username);
         claims.put("iat", new Date());
-        return Jwts.builder()
+
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
+        JwtBuilder jwtBuilder = Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
+                .signWith(key, SignatureAlgorithm.HS512);
+
+        return jwtBuilder.compact();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
+            JwtParser jwtParser = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build();
+
+            Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+            // If the above line doesn't throw an exception, the token is valid
             return true;
         } catch (Exception e) {
             return false;
@@ -40,7 +51,14 @@ public class JwtConfig {
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
+        JwtParser jwtParser = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build();
+
+        Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+        Claims claims = claimsJws.getBody();
         return claims.getSubject();
     }
 }
