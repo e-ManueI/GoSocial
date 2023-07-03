@@ -12,7 +12,6 @@ export const Login = (props) => {
     return (
         <div className="auth-form-container">
             <h1>GoSocial</h1>
-            <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
