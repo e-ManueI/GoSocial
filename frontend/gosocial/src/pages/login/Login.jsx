@@ -30,6 +30,10 @@ export const Login = (props) => {
             toast.success("Succesfully login", {
                  position: toast.POSITION.TOP_RIGHT
             });
+
+            setTimeout(() => {
+                navigate("/home");
+            }, 3000);
         } catch (error) {
             //Handle login error
             console.log("Failed to sign in");
