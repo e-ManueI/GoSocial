@@ -41,6 +41,45 @@ h1 {
   color: white;
 }
 
+.auth-toast {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body {
+  display: flex;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body svg {
+  width: 15px;
+  height: 15px;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body svg path {
+  fill: green;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body {
+  display: flex;
+  align-items: center;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body span {
+  margin-right: 8px;
+}
+
+.auth-toast .Toastify__toast--success .Toastify__toast-body p {
+  display: none;
+}
+
 .auth-form-container, .login-form, .register-form {
   display: flex;
   flex-direction: column;

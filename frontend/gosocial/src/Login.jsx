@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +42,7 @@ export const Login = (props) => {
                 <button type="submit">Log In</button>
             </form>
             
-            <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
+            <button className="link-btn" onClick={() => navigate("/register")}>Don't have an account? Register here.</button>
         </div>    
     )
 }
