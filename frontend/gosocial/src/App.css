@@ -22,7 +22,7 @@ input {
 .App {
   text-align: center;
   display: flex;
-  min-height: 70vh;
+  min-height: 99vh;
   align-items: center;
   justify-content: center;
   color: white;
