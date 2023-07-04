@@ -62,7 +62,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/allusers")
     List<User> getAllUsers() {
         return userRepository.findAll();
     }
