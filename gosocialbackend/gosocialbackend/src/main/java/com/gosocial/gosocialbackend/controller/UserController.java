@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -58,5 +60,10 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/users")
+    List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
