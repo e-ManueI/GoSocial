@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import Home from "./pages/home/Home";
 import { Login } from './pages/login/Login';
 import { Register } from './pages/register/Register';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import EditUser from "./users/EditUser";
 
 const App = () => {
   const [currentForm, setCurrentForm] = useState('login');
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/" element={<Login onFormSwitch={toggleForm} />} />
           <Route path="/register" element={<Register onFormSwitch={toggleForm} />} />
           <Route path="/home" element={<Home />} />
+          <Route exact path="/edituser/:id" element={<EditUser />} />
         </Routes>
       </div>
     </Router>

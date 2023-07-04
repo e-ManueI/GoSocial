@@ -19,7 +19,7 @@ export default function Home() {
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/api/users/${id}`);
+    await axios.delete(`http://localhost:8080/api/users/delete/${id}`);
     loadUsers();
   };
 
