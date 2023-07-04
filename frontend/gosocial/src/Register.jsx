@@ -1,15 +1,31 @@
 import React, { useState } from "react";
+import axios from "axios"
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+    const [password, setPass] = useState('');
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
+
+        try {
+            await axios.post("http://localhost:8080/api/users/register", {
+            email,
+            password,
+            fname,
+            lname,
+            });
+
+            // Redirect to the login page or show a success message
+            console.log("Succesfully registered")
+        } catch (error) {
+            // Handle registration error
+            console.log("Failed to register");
+            console.error(error);
+        }
     }
 
     return (
@@ -24,7 +40,7 @@ export const Register = (props) => {
                 <label htmlFor="email">Email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
                 <label htmlFor="password">Password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
+                <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
                 <p className="terms">By signing up, you agree to our Terms,</p>
                 <p className="terms">Privacy Policy and Cookies Policy.</p>
                 <button type="submit">Register</button>
