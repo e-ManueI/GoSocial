@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -58,4 +61,31 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/allusers")
+    List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @PutMapping("/edit/{id}")
+    User updateUser(@RequestBody User newUser,@PathVariable Long id){
+        return userRepository.findById(id)
+                .map(user ->  {
+                    user.setFname(newUser.getFname());
+                    user.setLname(newUser.getLname());
+                    user.setEmail(newUser.getEmail());
+                    user.setPassword(newUser.getPassword());
+                    return userRepository.save(user);
+                }).orElseThrow(() -> new RuntimeException("No user with such credentials."));
+    }
+
+    @DeleteMapping("delete/{id}")
+    String deleteUser(@PathVariable Long id) {
+        if(!userRepository.existsById(id)){
+            throw new RuntimeException("User is not found");
+        }
+        userRepository.deleteById(id);
+        return "User with id "+id+" has been deleted succesfully";
+    }
+
 }
