@@ -6,7 +6,7 @@ import com.gosocial.gosocialbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +21,12 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
+        // Check if the user already exists
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists.");
+        }
+
         // Perform validation and save the user to the database
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
@@ -30,12 +36,12 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody User user) {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new RuntimeException("Invalid username or password.");
         }
 
         // Perform password validation
         if (!existingUser.getPassword().equals(user.getPassword())) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new RuntimeException("Invalid username or password.");
         }
 
         // Generate JWT token
