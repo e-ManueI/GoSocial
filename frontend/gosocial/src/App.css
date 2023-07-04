@@ -6,30 +6,17 @@ label {
 
 input {
   padding: 0.75rem;
-  margin: 0.5rem 0;
+  margin-bottom: 10px;
   border: none;
   border-radius: 10px;
-  background-color: whitesmoke;
 }
 
-button {
-  border: none;
-  background-color: whitesmoke;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #f7944d;
-  margin: 10px 0;
-  font-size: small;
-  font-weight: 700;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: bolder; 
+.heading {
   font-family: 'Pacifico', cursive;
-  color: whitesmoke;
-  margin-bottom: 5px;
+  font-weight: 900;
+}
+.subheading {
+  font-size: 14px;
 }
 
 .App {
@@ -103,4 +90,10 @@ h1 {
   background: none;
   color: white;
   text-decoration: underline;
+  border-radius: none;
+  border: none;
+  box-shadow: none;
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: small;
 }

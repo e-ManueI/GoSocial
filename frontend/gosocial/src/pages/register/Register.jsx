@@ -47,22 +47,22 @@ export const Register = (props) => {
                     padding: "15px",
                     }}/>
 
-            <div className="auth-form-container">
-                <h1>GoSocial</h1>
-                <h4>Sign Up to meet your friends!</h4>
+            <div className="App auth-form-container">
+                <h1 className="heading fs-1 mb-3">GoSocial</h1>
+                <h4 className="subheading my-4 fw-bold">Sign Up to meet your friends!</h4>
 
                 <form className="register-form" onSubmit={handleSubmit}>
                     <label htmlFor="fname">First Name</label>
-                    <input value={fname}  onChange={(e) => setFname(e.target.value)} name="fname" id="fname" placeholder="First Name" />
+                    <input value={fname}  onChange={(e) => setFname(e.target.value)} name="fname" id="fname" placeholder="First Name" required/>
                     <label htmlFor="lname">Last Name</label>
-                    <input value={lname} onChange={(e) => setLname(e.target.value)} name="lname" id="lname" placeholder="Last Name" />    
+                    <input value={lname} onChange={(e) => setLname(e.target.value)} name="lname" id="lname" placeholder="Last Name"/>    
                     <label htmlFor="email">Email</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required/>
                     <label htmlFor="password">Password</label>
-                    <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
-                    <p className="terms">By signing up, you agree to our Terms,</p>
+                    <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*********" id="password" name="password" required/>
+                    <p className="terms mt-1">By signing up, you agree to our Terms,</p>
                     <p className="terms">Privacy Policy and Cookies Policy.</p>
-                    <button type="submit">Register</button>
+                    <button type="submit" className="btn btn-light mt-2">Register</button>
                 </form>
                 <button className="link-btn" onClick={() => navigate("/")}>Already have an account? Login here.</button>
             </div>    
